@@ -1,3 +1,6 @@
+/**
+Класс Market представляет собой модель рынка, реализующую интерфейсы iMarketBehaviour и iQueueBehaviour
+*/
 package Classes;
 
 import java.util.List;
@@ -8,26 +11,32 @@ import Interfaces.iActorBehaviuor;
 import Interfaces.iMarketBehaviour;
 import Interfaces.iQueueBehaviour;
 
+/** класс магазин. Имплементирует интерфейсы */
 public class Market implements iMarketBehaviour,iQueueBehaviour {
 
+    /** список покупателей в магазине. Приватный(инкапсуляция) */
     private List<iActorBehaviuor> queue;
 
+    /** конструктор класса */
     public Market() {
         this.queue = new ArrayList<iActorBehaviuor>();
     }
 
+    /** переопределение метода: Покупатель зашел в магазин */
     @Override
     public void acceptToMarket(iActorBehaviuor actor) {
         System.out.println(actor.getActor().getName()+" клиент пришел в магазин ");
         takeInQueue(actor);
     }
 
+    /** переопределение метода: Покупатель занял очередь */
     @Override
     public void takeInQueue(iActorBehaviuor actor) {
         this.queue.add(actor);
         System.out.println(actor.getActor().getName()+" клиент добавлен в очередь ");
     }
 
+    /** переопределение метода: покупатель покинул магазин */
     @Override
     public void releaseFromMarket(List<Actor> actors) {
         for(Actor actor:actors)
@@ -37,7 +46,7 @@ public class Market implements iMarketBehaviour,iQueueBehaviour {
         }
         
     }
-
+    /** переопределение метода: обновление данных. */
     @Override
     public void update() {
        takeOrder();
@@ -45,6 +54,7 @@ public class Market implements iMarketBehaviour,iQueueBehaviour {
        releaseFromQueue();
     }
 
+    /** переопределение метода: заказ получен */
     @Override
     public void giveOrder() {
         for(iActorBehaviuor actor: queue)
@@ -58,6 +68,7 @@ public class Market implements iMarketBehaviour,iQueueBehaviour {
         
     }
 
+    /** переопределение метода: клиент ушел из очереди */
     @Override
     public void releaseFromQueue() {
        List<Actor> releaseActors = new ArrayList<>();
@@ -74,7 +85,7 @@ public class Market implements iMarketBehaviour,iQueueBehaviour {
     }
 
 
-
+    /** переопределение метода: покупатель сделaл заказ */
     @Override
     public void takeOrder() {
         for(iActorBehaviuor actor:queue)

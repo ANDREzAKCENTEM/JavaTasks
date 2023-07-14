@@ -1,3 +1,7 @@
+/**
+* Класс TaxService служит для проверки магазина или аудита. Работает отдельно и выводит информацию о всех заказах и покупках
+*/
+
 package Classes;
 
 import Interfaces.iActorBehaviuor;
